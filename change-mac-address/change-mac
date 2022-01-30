@@ -1,0 +1,15 @@
+#!/usr/bin/env bash
+function change-mac () {
+	local ADDRESS="$1"
+	GREEN='\e[0;32m'
+	NC='\e[0m'
+
+	sudo ifconfig wlo1 down
+	if [ $ADDRESS ]; then
+		sudo ifconfig wlo1 hw ether "$ADDRESS"
+	else
+		sudo ifconfig wlo1 hw ether 00:16:6B:5A:B4:11
+	fi
+	sudo ifconfig wlo1 up
+	echo -e "${GREEN}[+]${NC} Mac Address changed successfully"
+}
